@@ -74,7 +74,7 @@ func (q *ArticleQueries) UpdateArticleById(article models.Article) (models.Artic
 	query := `UPDATE articles SET title = ?, content = ?, category = ?, status = ? WHERE id = ?`
 
 	// Send query to database.
-	_, err := q.Exec(query, article.Title, article.Content, article.Id)
+	_, err := q.Exec(query, article.Title, article.Content, article.Category, article.Status, article.Id)
 	if err != nil {
 		// Return empty object and error.
 		return article, err

@@ -15,9 +15,8 @@ func GetArticles(c *gin.Context) {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
-	page := utils.StringToInt(c.DefaultQuery("page", "1"))
-	limit := utils.StringToInt(c.DefaultQuery("limit", "0"))
-	offset := (page - 1) * limit
+	limit := utils.StringToInt(c.Param("limit"))
+	offset := utils.StringToInt(c.Param("offset"))
 	articles, err := db.GetArticleWithPagination(offset, limit)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
@@ -76,7 +75,7 @@ func UpdateArticleById(c *gin.Context) {
 
 	_, err = db.UpdateArticleById(article)
 	if err != nil {
-		c.JSON(404, gin.H{"error": "article not found"})
+		c.JSON(404, gin.H{"error": "article not found" + err.Error()})
 		return
 	}
 	c.JSON(200, gin.H{"message": "article updated"})
