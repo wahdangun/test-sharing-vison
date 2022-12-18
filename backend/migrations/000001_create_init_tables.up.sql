@@ -2,13 +2,14 @@
 CREATE TABLE articles (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     title VARCHAR (255) NOT NULL,
     content TEXT NOT NULL,
     status VARCHAR (150) NOT NULL,
     category VARCHAR (150) NOT NULL
 );
 
-CREATE TABLE logging (
+CREATE TABLE loggings (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     user_id INT NOT NULL,
@@ -18,6 +19,6 @@ CREATE TABLE logging (
 );
 
 -- Add indexes
-CREATE INDEX active_article ON article (id) ;
-CREATE INDEX active_logging ON logging (id) ;
+CREATE INDEX active_article ON articles (id) ;
+CREATE INDEX active_logging ON loggings (id) ;
 

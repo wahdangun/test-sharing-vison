@@ -13,7 +13,7 @@ type ArticleQueries struct {
 }
 
 func (q *ArticleQueries) GetArticle() ([]models.Article, error) {
-	// Define books variable.
+	// Define   variable.
 	article := []models.Article{}
 
 	// Define query string.
@@ -32,7 +32,7 @@ func (q *ArticleQueries) GetArticle() ([]models.Article, error) {
 
 // get article by id
 func (q *ArticleQueries) GetArticleById(id string) (models.Article, error) {
-	// Define books variable.
+	// Define   variable.
 	article := models.Article{}
 
 	// Define query string.
@@ -51,7 +51,7 @@ func (q *ArticleQueries) GetArticleById(id string) (models.Article, error) {
 
 // get article with pagination
 func (q *ArticleQueries) GetArticleWithPagination(offset int, limit int) ([]models.Article, error) {
-	// Define books variable.
+	// Define   variable.
 	article := []models.Article{}
 
 	// Define query string.
@@ -84,7 +84,7 @@ func (q *ArticleQueries) UpdateArticleById(article models.Article) (models.Artic
 
 // delete article by id
 func (q *ArticleQueries) DeleteArticleById(id string) (models.Article, error) {
-	// Define books variable.
+	// Define   variable.
 	article := models.Article{}
 
 	// Define query string.

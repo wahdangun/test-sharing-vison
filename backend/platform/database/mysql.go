@@ -15,21 +15,21 @@ import (
 // MysqlConnection func for connection to Mysql database.
 func MysqlConnection() (*sqlx.DB, error) {
 	err := godotenv.Load()
+	if err != nil {
+		return nil, fmt.Errorf("error, not loaded .env file, %w", err)
+	}
 	// Define database connection settings.
 	maxConn, _ := strconv.Atoi(os.Getenv("DB_MAX_CONNECTIONS"))
 	maxIdleConn, _ := strconv.Atoi(os.Getenv("DB_MAX_IDLE_CONNECTIONS"))
 	maxLifetimeConn, _ := strconv.Atoi(os.Getenv("DB_MAX_LIFETIME_CONNECTIONS"))
-	fmt.Println("db type", os.Getenv("DB_TYPE"))
 	// Build Mysql connection URL.
 	mysqlConnURL, err := utils.ConnectionURLBuilder("mysql")
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(mysqlConnURL)
 	// Define database connection for Mysql.
 	db, err := sqlx.Connect("mysql", mysqlConnURL)
 	if err != nil {
-		fmt.Println(mysqlConnURL)
 		return nil, fmt.Errorf("error, not connected to database, %w", err)
 	}
 

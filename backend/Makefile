@@ -1,6 +1,15 @@
 APP_NAME = test-sharing-vision
+MIGRATIONS_FOLDER =  ${CURDIR}/migrations
+DATABASE_URL = mysql://root:mysqlpw@tcp(localhost:3306)/article
 
-docker.run: docker.sharingvision docker.sharingvision docker.redis migrate.up
+docker.run: docker.sharingvision docker.visionmysql docker.redis migrate.up
+
+migrate.up:
+	migrate -path $(MIGRATIONS_FOLDER) -database "$(DATABASE_URL)" up
+
+migrate.down:
+	migrate -path $(MIGRATIONS_FOLDER) -database "$(DATABASE_URL)" down
+
 
 docker.sharingvision.build:
 	docker build -t sharingvision .
@@ -21,18 +30,19 @@ docker.visionmysql:
 
 docker.redis:
 	docker run --rm -d \
-		--name cgapp-redis \
-		--network dev-network \
+		--name vision-redis \
 		-p 6379:6379 \
 		redis
 
 docker.stop: docker.stop.sharingvision docker.stop.visionmysql docker.stop.redis
 
 docker.stop.sharingvision:
-	docker stop sharing
+	docker stop sharingvision
 
-docker.stop.mysql:
+docker.stop.visionmysql:
 	docker stop visionmysql
+docker.stop.redis:
+	docker stop vision-redis	
 
 swag:
 	swag init

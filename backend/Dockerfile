@@ -26,7 +26,6 @@ ENV env=prod
 
 RUN cp /build/main .
 COPY .env /dist
-COPY .migrations /dist/migrations
 
 EXPOSE 8080
 
