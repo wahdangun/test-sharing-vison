@@ -43,6 +43,3 @@ docker.stop.visionmysql:
 	docker stop visionmysql
 docker.stop.redis:
 	docker stop vision-redis	
-
-swag:
-	swag init
