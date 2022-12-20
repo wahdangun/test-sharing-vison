@@ -55,7 +55,7 @@ func (q *ArticleQueries) GetArticleWithPagination(offset int, limit int) ([]mode
 	article := []models.Article{}
 
 	// Define query string.
-	query := `SELECT id, title, content, status, category, created_date, updated_date FROM articles LIMIT ? OFFSET ?`
+	query := `SELECT id, title, content, status, category, created_date, updated_date, (select count(id) from articles) as total_data FROM articles LIMIT ? OFFSET ?`
 	// Send query to database.
 	err := q.Select(&article, query, limit, offset)
 	if err != nil {

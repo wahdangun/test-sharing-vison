@@ -8,4 +8,5 @@ type Article struct {
 	Content      string `db:"content" json:"content" `
 	Category     string `db:"category" json:"category" `
 	Status       string `db:"status" json:"status"`
+	Total_data   int    `db:"total_data" json:"total_data"`
 }
